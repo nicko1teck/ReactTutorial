@@ -25,40 +25,11 @@ class Book extends React.Component {
     
     }
 
-
-    handleSubmit(event) {
-        let {author, title, published} = this.state;
-        published += '-01-01';
-        const book = {
-            author: author,
-            title: title,
-            published: published
-        }
-                                /*   https://github.com/axios/axios/issues/191 Stringigying the data posted */
-        axios.post("https://cors-anywhere.herokuapp.com/http://localhost:4000/books", JSON.stringify(book))
-        .then(result=>{
-            console.log(result);
-        })
-        .catch(error=>{
-            console.log(error);
-        });
-        event.preventDefault();
-    }
-
-    handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-
     componentDidMount() {
         if (!this.state.id) {
             return;
         }
+        //const proxyUrl = "https://cors-anywhere.herokuapp.com/";
         axios.get(process.env.REACT_APP_SERVER_URL + '/' + this.state.id)
             .then(result => {
                 let { author, title, published}  = result.data[0];
@@ -73,15 +44,43 @@ class Book extends React.Component {
                 console.log(error);
             });
     }
+
+
+    handleSubmit(event) {
+        //event.preventDefault();
+
+        let {author, title, published} = this.state;
+        published += '-01-01';
+        const book = {
+            author: author,
+            title: title,
+            published: published
+        }
     
+        
+        axios.post(process.env.REACT_APP_SERVER_URL, book)
+        .then(result=>{
+            console.log(result);
+            this.setState({ created: true });
+        })
+        .catch(error=>{
+            console.log(error);
+            //this.errorMessage(error.toString());
+        });
+        
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState({
+            [name]: value
+        });
+    }
 
 
     
-
-    
-
-
-
 
     render() {
         /*console.log('server URL', process.env.REACT_APP_SERVER_URL);*/

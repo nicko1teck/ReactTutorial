@@ -16,15 +16,19 @@ class BookLibrary extends React.Component {
         };
     }
 
+    
     componentDidMount() {
 
         console.log();
         console.log(process.env.REACT_APP_SERVER_URL);
         console.log();
+
+        //This call seems to laod the initial stat/state upon reaching the page
         axios(process.env.REACT_APP_SERVER_URL)
         .then(result=> this.setState({books: result.data}))
         .catch(error=> console.log(error));
     }
+    
 
     render () {
 

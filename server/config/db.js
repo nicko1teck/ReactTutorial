@@ -7,5 +7,4 @@ const db = {
     'database': 'books'
 }
 
-
 module.exports=db;

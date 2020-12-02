@@ -48,6 +48,7 @@ class Book extends React.Component {
 
     handleSubmit(event) {
         //event.preventDefault();
+        console.log(this.state);
 
         let {author, title, published} = this.state;
         published += '-01-01';
@@ -84,7 +85,7 @@ class Book extends React.Component {
 
     render() {
         /*console.log('server URL', process.env.REACT_APP_SERVER_URL);*/
-        console.log(this.state);
+        //console.log(this.state);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>

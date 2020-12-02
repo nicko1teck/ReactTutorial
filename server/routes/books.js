@@ -7,18 +7,6 @@ const BookRepository = require('../database/book-repository');
 
 let repository = new BookRepository(connectionPool);
 
-
-
-router.options('/*', function (req, res){
-  res.setHeader("Access-Control-Allow-Origin", "*")
-  res.setHeader("Access-Control-Allow-Headers", "*")
-  res.setHeader("Access-Control-Allow-Methods", "*")
-  res.send()
-})
-
-
-
-
 /*
 router.get('/:id', function (req, res) {
   repository.get(req.params.id, (err, result) => {

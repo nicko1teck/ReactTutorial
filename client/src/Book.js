@@ -2,10 +2,35 @@
 import React from 'react';
 import './Book.css';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import FlashMessage from './FlashMessage';
+
 
 
 
 class Book extends React.Component {
+
+    validation = {
+
+        author: {
+            rule: /^\S.{0,48}\S$/,
+            message: 'Author field must have 2-50 characters'
+        },
+
+        title: {
+            rule: /^\S.{0,68}\S$/,
+            message: 'Title field must have 2-70 characters'
+        },
+
+        published: {
+            rule: /^\d{4}$/,
+            message: 'Publication date must be a four digit year.'
+        }
+
+
+
+    }
+     
 
     constructor(props) {
         super(props);
@@ -13,7 +38,8 @@ class Book extends React.Component {
         this.state = {
             author: '',
             title: '',
-            published: ''
+            published: '',
+            submitAttempts: 0,
         }
 
         /*
@@ -21,8 +47,29 @@ class Book extends React.Component {
         but rather to this class/Book object. 
         */
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    
+        this.handleSubmit = this.handleSubmit.bind(this); 
+    }
+
+    validate () {
+
+        //this.showMessage('FUUUUUUUCCCCKKKK');
+
+        for(let field in this.validation) {
+            const rule = this.validation[field].rule;
+            const message = this.validation[field].message;
+            const value = this.state[field];
+
+           if(!value.match(rule)) {
+                //console.log(field, rule, message, value);
+                this.setState({ 
+                    message: message, 
+                    submitAttempts: this.state.submitAttempts + 1 
+                });
+                return false;
+            }
+        }
+
+        return true;
     }
 
     componentDidMount() {
@@ -45,13 +92,29 @@ class Book extends React.Component {
             });
     }
 
+    
+        
+
+
+
+
 
     handleSubmit(event) {
-        //event.preventDefault();
-        console.log(this.state);
+
+        event.preventDefault();
+
+        if (!this.validate()){
+            return;
+        }
+
+        //this.validate();
+        
+        //console.log(this.state);
 
         let {author, title, published} = this.state;
+        
         published += '-01-01';
+
         const book = {
             author: author,
             title: title,
@@ -68,6 +131,8 @@ class Book extends React.Component {
             console.log(error);
             //this.errorMessage(error.toString());
         });
+
+        
         
     }
 
@@ -80,12 +145,17 @@ class Book extends React.Component {
         });
     }
 
-
+   
     
 
     render() {
         /*console.log('server URL', process.env.REACT_APP_SERVER_URL);*/
         //console.log(this.state);
+
+        if (this.state.created) {
+            return < Redirect to="/"/>
+        }
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -100,9 +170,11 @@ class Book extends React.Component {
                     <input value={this.state.published} onChange={this.handleChange} type="text" name="published" id="published" />
 
                     <input type="submit" value="Save" />
-
+                    <FlashMessage key={this.state.submitAttempts} message={this.state.message} duration='3000'/>
                 </form>
             </div>
+            
+            
         );
     }
 

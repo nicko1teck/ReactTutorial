@@ -11,7 +11,7 @@ class BookRepository {
 
     save(book, callback) {
         this.pool.query('insert into books set ?', book, callback);
-        throw new Error('something happened');
+    
     }
     
 

@@ -69,6 +69,7 @@ router.post('/', function (req, res) {
 
   repository.save(req.body, (err, result) => {
     if (err) {
+      console.log("THERE WAS AN ERROR IN THE SAVE METHOD");
       res.status(500).json({ 'error': err.toString() });
     }
     else {

@@ -1,5 +1,15 @@
 
 
+
+.library-wall {
+    background-image: url("https://images.app.goo.gl/gpExwKdGd1cjqEKC9");
+    /*background-color: #cccccc;*/
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+
 form {
     display: grid;
     grid-template-columns: 1fr 1fr;

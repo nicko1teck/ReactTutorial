@@ -23,6 +23,9 @@ function App() {
           <Route path="/create">
             <Book/>
           </Route>
+          <Route path="/edit/:id">
+            <Book/>
+          </Route>
         </Switch>
 
       </div>

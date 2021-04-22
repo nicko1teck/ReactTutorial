@@ -7,7 +7,7 @@ const BookRepository = require('../database/book-repository');
 
 let repository = new BookRepository(connectionPool);
 
-/*
+
 router.get('/:id', function (req, res) {
   repository.get(req.params.id, (err, result) => {
     if (err) {
@@ -62,7 +62,7 @@ router.delete('/:id', function (req, res) {
   });
 })
 
-*/
+
 
 // Save a book
 router.post('/', function (req, res) {

@@ -1,28 +1,19 @@
 
 
-table {
+.library-message {
+
+    margin-top: 2em;
     border-spacing: 3em 1em;
-    margin-top: 3em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-th {
-    text-align: left;
-    padding-bottom: 1em;
-
+    text-align: center;
+    font-size: 1.em;
 }
 
 
 
-td:nth-child(1){
-    font-weight: 550;
-}
-
-td:nth-child(2){
-    font-weight: 550;
-}
-
-svg {
-    color: rgba(0, 0, 0, 0.644);
+.book-library .message {
+    font-weight: bold;
+    height: 2em;
+    color: red;
+    text-align: center;
+    margin-top: 1m;
 }

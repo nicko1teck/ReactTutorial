@@ -9,7 +9,7 @@ function Header() {
 return (
     <div className="header" >
         <ul className="header-left">
-            <li className="logo"><Link to="/">Book Libary</Link></li>
+            <li className="logo"><Link to="/">BiblioTech</Link></li>
         </ul>
         <ul className="header-right">
             <li><Link to="/create">Create</Link></li>

@@ -1,10 +1,11 @@
 
 
 const db = {
-    'user': 'books',
-    'password': 'password',
+    'user': 'root',
+    'password': 'root',
     'host': 'localhost',
-    'database': 'books'
+    'database': 'books',
+    'timezone': 'utc', 
 }
 
 module.exports=db;

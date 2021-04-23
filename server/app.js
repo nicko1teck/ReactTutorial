@@ -8,6 +8,7 @@ const router = express.Router();
 
 var app = express();
 
+
 /*
 app.options('/*', function (req, res){
   res.setHeader("Access-Control-Allow-Origin", "*")
@@ -62,5 +63,45 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.status(err.status || 500).json({ 'error': err.toString() });
 });
+
+// ** MIDDLEWARE ** //
+const whitelist = ['http://localhost:3000', 'http://localhost:8000'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin)
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable")
+      callback(null, true)
+    } else {
+      console.log("Origin rejected")
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+
+app.use(cors(corsOptions))
+
+
+
+
+
+// Serve client react instead of backend 
+// Add the follwing code to your server file on the backend 
+//const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
+
+
+
+
+
 
 module.exports = app;

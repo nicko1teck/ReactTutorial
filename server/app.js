@@ -7,6 +7,7 @@ var cors = require('cors');
 const router = express.Router();
 
 var app = express();
+const PORT = process.env.PORT || 8080;
 
 
 /*

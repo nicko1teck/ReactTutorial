@@ -55,7 +55,7 @@ app.use(function (err, req, res, next) {
 });
 
 // ** MIDDLEWARE ** //
-const whitelist = ['http://localhost:3000', 'http://localhost:8000', 'https://bibliotech-react.herokuapp.com/'];
+const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'http://localhost:8000', 'https://bibliotech-react.herokuapp.com/', '*'];
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)

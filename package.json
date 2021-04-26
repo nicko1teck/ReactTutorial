@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "concurrently \"nodemon start\" \"cd client && npm start\" \"node ./bin/www\" ",
-    "server": "nodemon start"
+    "start": "app.js"
   },
   "repository": {
     "type": "git",

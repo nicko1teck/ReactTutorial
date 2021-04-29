@@ -4,19 +4,40 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const router = express.Router();
+//const router = express.Router();
 
-var app = express();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var booksRouter = require('./routes/books');
 
+var app = express();
+
+//const mysql = require('mysql');
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(cors());
+// ** MIDDLEWARE ** //
+const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'http://localhost:8000', 'https://bibliotech-react.herokuapp.com/', '*'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin)
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable")
+      callback(null, true)
+    } else {
+      console.log("Origin rejected")
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+
+app.use(cors(corsOptions))
 
 /*
 app.use(function(req,res,next) {
@@ -54,23 +75,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).json({ 'error': err.toString() });
 });
 
-// ** MIDDLEWARE ** //
-const whitelist = ['http://localhost:3000', 'http://localhost:4000', 'http://localhost:8000', 'https://bibliotech-react.herokuapp.com/', '*'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
 
-
-app.use(cors(corsOptions))
 
 
 

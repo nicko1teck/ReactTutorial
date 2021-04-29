@@ -1,3 +1,4 @@
+
 'use strict'
 
 const mysql = require('mysql')
@@ -24,3 +25,4 @@ const connectionPool = {
 
 
 module.exports = connectionPool;
+

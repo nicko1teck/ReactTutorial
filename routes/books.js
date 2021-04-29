@@ -1,12 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
+//const dbConn = require('../config/db');
 
 const router = express.Router();
-//const connectionPool = require('/database/connection-pool.js');
-//const BookRepository = require('/database/book-repository.js');
-// Relative path example:  ReactTutorial\database\book-repository.js
-const connectionPool = require('../database/connection-pool');
+
 const BookRepository = require('../database/book-repository');
+const connectionPool = require('../database/connection-pool');
 
 let repository = new BookRepository(connectionPool);
 
